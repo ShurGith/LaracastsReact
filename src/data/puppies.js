@@ -35,4 +35,22 @@ export  const puppies = [
             image: 6,
             title: "Ready for anything",
         },
+        {
+            id: 7,
+            name: "Marley",
+            image: 7,
+            title: "Most loving pup",
+        },
+        {
+            id: 8,
+            name: "Hlinda",
+            image: 8,
+            title: "Loves to play",
+        },
+        {
+            id: 9,
+            name: "Lulu",
+            image: 9,
+            title: "Good at fetch",
+        },
     ]

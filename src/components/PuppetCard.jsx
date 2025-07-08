@@ -1,23 +1,23 @@
 import { Icon } from '@iconify-icon/react/dist/iconify.js'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { ShortContext } from '../context/ShortContext'
+import { SearchContext } from '../context/SearchContext'
 
 function PuppetCard({ name, image, title }) {
-    const [selected, setSelected] = useState(false)
-     const {inList, setInlist, addToList} = useContext(ShortContext)
+    const { inList, handleList } = useContext(ShortContext)
+    const {valor, setValor, visible, setVisible} = useContext(SearchContext)
+    const isSelected = inList.includes(name);
 
-    function seleccionar(){
-         setSelected(!selected)
-       /*  setInlist([{name: name, image: image}, ...inList])
-         console.log(inList);*/
-        addToList(name, image)
-         
+    const hidden = (valor !== name && valor.length > 2) ? "hidden" : ""
+
+    const seleccionar = (name, image) => {
+        handleList(name, image)
+
     }
-
-    const icono = selected ? "fluent-emoji-flat:red-heart"
+    const icono = isSelected ? "fluent-emoji-flat:red-heart"
         : "ei:heart"
     return (
-        <li className="overflow-clip rounded-lg bg-white shadow-md ring ring-black/5 hover:-translate-y-0.5">
+        <li className={`${hidden} overflow-clip rounded-lg bg-white shadow-md ring ring-black/5 hover:-translate-y-0.5`}>
             <img
                 className="aspect-square object-cover"
                 alt={name}
@@ -30,7 +30,7 @@ function PuppetCard({ name, image, title }) {
                     <p className="text-slate-500">{title}</p>
                 </div>
                 <button className="group cursor-pointer"
-                    onClick={() => seleccionar()}>
+                    onClick={() => seleccionar(name, image)}>
                     <Icon icon={icono} width="32" />
                 </button>
             </div>

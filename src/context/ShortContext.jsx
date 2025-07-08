@@ -1,20 +1,23 @@
 import { createContext, useState } from "react";
 
-const ShortContext=createContext()
-function ShortProvider(props){
+const ShortContext = createContext()
+function ShortProvider(props) {
     const [inList, setInlist] = useState([])
-    function addToList(name, image){
-        inList.map((elemento)=>{
-            if(elemento.name === name && elemento.image === image)
-                arr = arr.filter(item => item !== 3);
-        })
-        setInlist([{name: name, image: image}, ...inList])
-        
-         console.log(inList);
-    }
-    return(
+
+
+    const handleList = (item) => {
+        const isSelected = inList.includes(item);
+
+        if (isSelected) {
+            const nuevosItems = inList.filter(currentItem => currentItem !== item);
+            setInlist(nuevosItems);
+        } else {
+            setInlist([item, ...inList]);
+        }
+    };
+    return (
         <ShortContext.Provider value={{
-            inList, setInlist, addToList,
+            inList, setInlist, handleList,
         }}>
             {props.children}
         </ShortContext.Provider>
